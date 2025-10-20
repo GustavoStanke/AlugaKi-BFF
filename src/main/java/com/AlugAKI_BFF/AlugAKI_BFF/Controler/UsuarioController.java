@@ -2,6 +2,7 @@ package com.AlugAKI_BFF.AlugAKI_BFF.Controler;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,11 +19,9 @@ import com.AlugAKI_BFF.AlugAKI_BFF.Service.UsuarioService;
 @RequestMapping("/bff/usuarios")
 public class UsuarioController {
 
-
     private final UsuarioService usuarioService;
 
     public UsuarioController(UsuarioService usuarioService) {
-        
         this.usuarioService = usuarioService;
     }
 

@@ -12,10 +12,10 @@ public class Usuario {
     private boolean status;
 
     // === Construtor vazio (necessário para frameworks como Spring e Jackson) ===
-    public usuario() {}
+    public Usuario() {}
 
     // === Construtor completo ===
-    public usuario(int id, String nome, String email, String senha, String cpfCnpj, String telefone, int enderecoId, boolean status) {
+    public Usuario(int id, String nome, String email, String senha, String cpfCnpj, String telefone, int enderecoId, boolean status) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -91,17 +91,4 @@ public class Usuario {
         this.status = status;
     }
 
-    // === Opcional: método toString() para depuração ===
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", cpfCnpj='" + cpfCnpj + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", enderecoId=" + enderecoId +
-                ", status=" + status +
-                '}';
-    }
 }
