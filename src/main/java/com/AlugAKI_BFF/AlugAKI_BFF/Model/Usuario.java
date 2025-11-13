@@ -2,37 +2,25 @@ package com.AlugAKI_BFF.AlugAKI_BFF.Model;
 
 public class Usuario {
 
-    private int id;
+    private Integer idUsuario;
     private String nome;
     private String email;
-    private String senha;
     private String cpfCnpj;
-    private String telefone;
-    private int enderecoId;
-    private boolean status;
+    private String contato;
+    private String senha;
+    private String cep;
+    private String endereco;
+    private String numeroResidenc;
+    private String foto;
 
-    // === Construtor vazio (necessário para frameworks como Spring e Jackson) ===
     public Usuario() {}
 
-    // === Construtor completo ===
-    public Usuario(int id, String nome, String email, String senha, String cpfCnpj, String telefone, int enderecoId, boolean status) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.cpfCnpj = cpfCnpj;
-        this.telefone = telefone;
-        this.enderecoId = enderecoId;
-        this.status = status;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    // === Getters e Setters ===
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -51,14 +39,6 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public String getCpfCnpj() {
         return cpfCnpj;
     }
@@ -67,28 +47,51 @@ public class Usuario {
         this.cpfCnpj = cpfCnpj;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getContato() {
+        return contato;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setContato(String contato) {
+        this.contato = contato;
     }
 
-    public int getEnderecoId() {
-        return enderecoId;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setEnderecoId(int enderecoId) {
-        this.enderecoId = enderecoId;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public boolean isStatus() {
-        return status;
+    public String getCep() {
+        return cep;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getNumeroResidenc() {
+        return numeroResidenc;
+    }
+
+    public void setNumeroResidenc(String numeroResidenc) {
+        this.numeroResidenc = numeroResidenc;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 }

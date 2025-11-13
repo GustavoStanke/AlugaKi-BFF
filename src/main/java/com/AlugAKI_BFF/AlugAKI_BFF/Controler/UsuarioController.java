@@ -2,6 +2,7 @@ package com.AlugAKI_BFF.AlugAKI_BFF.Controler;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,8 @@ import com.AlugAKI_BFF.AlugAKI_BFF.Model.Usuario;
 import com.AlugAKI_BFF.AlugAKI_BFF.Service.UsuarioService;
 
 @RestController
-@RequestMapping("/bff/usuarios")
+@RequestMapping("/bff/usuario")
+@CrossOrigin(origins = "*")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -31,22 +33,27 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Usuario buscarPorId(@PathVariable int id) {
-        return usuarioService.buscarPorId(id);
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable int id) {
+        Usuario u = usuarioService.buscarPorId(id);
+        if (u == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(u);
     }
 
     @PostMapping
-    public Usuario criarUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.criarUsuario(usuario);
+    public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario) {
+        Usuario criado = usuarioService.criarUsuario(usuario);
+        return ResponseEntity.ok(criado);
     }
 
     @PutMapping("/{id}")
-    public void atualizarUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
+    public ResponseEntity<Void> atualizarUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
         usuarioService.atualizarUsuario(id, usuario);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public void deletarUsuario(@PathVariable int id) {
+    public ResponseEntity<Void> deletarUsuario(@PathVariable int id) {
         usuarioService.deletarUsuario(id);
+        return ResponseEntity.noContent().build();
     }
 }
