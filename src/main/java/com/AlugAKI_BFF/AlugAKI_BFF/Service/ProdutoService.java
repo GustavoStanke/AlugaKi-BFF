@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -41,7 +44,13 @@ public class ProdutoService {
         return restTemplate.postForObject(baseUrl, produto, Produto.class);
     }
 
-    public void atualizarProduto(int id, Produto produto) {
-        restTemplate.put(baseUrl + "/" + id, produto);
+    public Produto atualizarProduto(int id, Produto produto) {
+        ResponseEntity<Produto> resp = restTemplate.exchange(
+            baseUrl + "/" + id,
+            HttpMethod.PUT,
+            new HttpEntity<>(produto),
+            Produto.class
+        );
+        return resp.getBody();
     }
 }

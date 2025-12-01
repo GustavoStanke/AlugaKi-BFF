@@ -52,9 +52,9 @@ public class AluguelController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> atualizar(@PathVariable int id, @RequestBody Aluguel aluguel) {
-        aluguelService.atualizarAluguel(id, aluguel);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Aluguel> atualizar(@PathVariable int id, @RequestBody Aluguel aluguel) {
+        Aluguel atualizado = aluguelService.atualizarAluguel(id, aluguel);
+        return ResponseEntity.ok(atualizado);
     }
 
     @DeleteMapping("/{id}")
@@ -68,5 +68,11 @@ public class AluguelController {
         Integer usuarioId = request != null ? request.getUsuarioIdUsuario() : null;
         Aluguel atualizado = aluguelService.marcarComoAlugado(id, usuarioId);
         return ResponseEntity.ok(atualizado);
+    }
+
+    @PostMapping("/{id}/confirmar")
+    public ResponseEntity<Aluguel> confirmar(@PathVariable int id) {
+        Aluguel confirmado = aluguelService.confirmarAluguel(id);
+        return ResponseEntity.ok(confirmado);
     }
 }

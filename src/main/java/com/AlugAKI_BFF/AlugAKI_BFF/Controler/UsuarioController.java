@@ -46,9 +46,9 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> atualizarUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
-        usuarioService.atualizarUsuario(id, usuario);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
+        Usuario atualizado = usuarioService.atualizarUsuario(id, usuario);
+        return ResponseEntity.ok(atualizado);
     }
 
     @DeleteMapping("/{id}")
@@ -64,8 +64,8 @@ public class UsuarioController {
     }
 
     @PostMapping("/redefinir-senha")
-    public ResponseEntity<Void> redefinirSenha(@RequestBody Object payload) {
-        usuarioService.redefinirSenha(payload);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Usuario> redefinirSenha(@RequestBody Object payload) {
+        Usuario usuario = usuarioService.redefinirSenha(payload);
+        return ResponseEntity.ok(usuario);
     }
 }

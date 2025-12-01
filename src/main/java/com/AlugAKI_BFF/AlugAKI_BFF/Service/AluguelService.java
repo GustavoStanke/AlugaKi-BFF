@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -49,8 +52,14 @@ public class AluguelService {
         return restTemplate.postForObject(baseUrl, aluguel, Aluguel.class);
     }
 
-    public void atualizarAluguel(int id, Aluguel aluguel) {
-        restTemplate.put(baseUrl + "/" + id, aluguel);
+    public Aluguel atualizarAluguel(int id, Aluguel aluguel) {
+        ResponseEntity<Aluguel> resp = restTemplate.exchange(
+            baseUrl + "/" + id,
+            HttpMethod.PUT,
+            new HttpEntity<>(aluguel),
+            Aluguel.class
+        );
+        return resp.getBody();
     }
 
     public void deletarAluguel(int id) {
@@ -60,5 +69,9 @@ public class AluguelService {
     public Aluguel marcarComoAlugado(int id, Integer usuarioId) {
         AlugarRequest body = new AlugarRequest(usuarioId);
         return restTemplate.postForObject(baseUrl + "/" + id + "/alugar", body, Aluguel.class);
+    }
+
+    public Aluguel confirmarAluguel(int id) {
+        return restTemplate.postForObject(baseUrl + "/" + id + "/confirmar", null, Aluguel.class);
     }
 }

@@ -13,7 +13,7 @@ Gateway BFF em Spring Boot 3 que expõe endpoints REST simplificados para o fron
 - API principal em execução (padrão em `http://localhost:8080`)
 
 ## Configuração
-Edite `src/main/resources/application.properties` conforme necessário (valores padrão do projeto):
+Edite `src/main/resources/application.properties` conforme necessário:
 ```properties
 server.port=8081
 api.usuario.url=http://localhost:8080/usuario
@@ -21,6 +21,7 @@ api.endereco.url=http://localhost:8080/enderecos
 api.produto.url=http://localhost:8080/produto
 api.periodo.url=http://localhost:8080/periodo
 api.aluguel.url=http://localhost:8080/aluguel
+api.statusaluguel.url=http://localhost:8080/statusaluguel
 ```
 
 ## Executando
@@ -38,37 +39,44 @@ src/main/resources
   application.properties
 ```
 
-## Endpoints BFF
-Todos respondem em `http://localhost:8081` (porta configurável via `server.port`).
+## Endpoints BFF (porta 8081 por padrão)
 
 ### Usuario
-- GET `/bff/usuario` — lista usuários.
-- GET `/bff/usuario/{id}` — busca por ID.
-- POST `/bff/usuario` — cria usuário.
-- PUT `/bff/usuario/{id}` — atualiza usuário.
-- DELETE `/bff/usuario/{id}` — remove usuário.
+- GET `/bff/usuario`
+- GET `/bff/usuario/{id}`
+- POST `/bff/usuario`
+- PUT `/bff/usuario/{id}`
+- DELETE `/bff/usuario/{id}`
+- POST `/bff/usuario/login`
+- POST `/bff/usuario/redefinir-senha`
 
 ### Produto
-- GET `/bff/produto` — lista produtos.
-- GET `/bff/produto/{id}` — busca por ID.
-- POST `/bff/produto` — cria produto.
+- GET `/bff/produto`
+- GET `/bff/produto/{id}`
+- POST `/bff/produto`
+- PUT `/bff/produto/{id}`
 
 ### Periodo
-- GET `/bff/periodo` — lista períodos.
-- GET `/bff/periodo/{id}` — busca por ID.
+- GET `/bff/periodo`
+- GET `/bff/periodo/{id}`
+
+### StatusAluguel
+- GET `/bff/statusaluguel`
+- GET `/bff/statusaluguel/{id}`
 
 ### Endereco
-- GET `/bff/enderecos` — lista endereços.
-- GET `/bff/enderecos/{id}` — busca por ID.
-- POST `/bff/enderecos` — cria endereço.
-- PUT `/bff/enderecos/{id}` — atualiza endereço.
-- DELETE `/bff/enderecos/{id}` — remove endereço.
+- GET `/bff/enderecos`
+- GET `/bff/enderecos/{id}`
+- POST `/bff/enderecos`
+- PUT `/bff/enderecos/{id}`
+- DELETE `/bff/enderecos/{id}`
 
 ### Aluguel
-- GET `/bff/aluguel` — lista aluguéis.
-- GET `/bff/aluguel/{id}` — busca por ID.
-- GET `/bff/aluguel/status/{statusId}` — lista aluguéis por status.
-- POST `/bff/aluguel` — cria aluguel.
-- PUT `/bff/aluguel/{id}` — atualiza aluguel.
-- DELETE `/bff/aluguel/{id}` — remove aluguel.
-- POST `/bff/aluguel/{id}/alugar` — marca como alugado (status 3) e atribui locatário. Body: `{"usuarioIdUsuario": <id>}`.
+- GET `/bff/aluguel`
+- GET `/bff/aluguel/{id}`
+- GET `/bff/aluguel/status/{statusId}`
+- POST `/bff/aluguel`
+- PUT `/bff/aluguel/{id}`
+- DELETE `/bff/aluguel/{id}`
+- POST `/bff/aluguel/{id}/alugar`
+- POST `/bff/aluguel/{id}/confirmar`

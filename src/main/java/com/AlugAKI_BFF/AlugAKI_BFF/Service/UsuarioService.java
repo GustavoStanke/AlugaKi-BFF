@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -42,8 +45,14 @@ public class UsuarioService {
         return restTemplate.postForObject(baseUrl, usuario, Usuario.class);
     }
 
-    public void atualizarUsuario(int id, Usuario usuario) {
-        restTemplate.put(baseUrl + "/" + id, usuario);
+    public Usuario atualizarUsuario(int id, Usuario usuario) {
+        ResponseEntity<Usuario> resp = restTemplate.exchange(
+            baseUrl + "/" + id,
+            HttpMethod.PUT,
+            new HttpEntity<>(usuario),
+            Usuario.class
+        );
+        return resp.getBody();
     }
 
     public void deletarUsuario(int id) {
@@ -54,7 +63,7 @@ public class UsuarioService {
         return restTemplate.postForObject(baseUrl + "/login", credenciais, Usuario.class);
     }
 
-    public void redefinirSenha(Object payload) {
-        restTemplate.postForLocation(baseUrl + "/redefinir-senha", payload);
+    public Usuario redefinirSenha(Object payload) {
+        return restTemplate.postForObject(baseUrl + "/redefinir-senha", payload, Usuario.class);
     }
 }
