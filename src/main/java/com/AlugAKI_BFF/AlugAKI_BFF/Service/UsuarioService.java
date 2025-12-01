@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
 import com.AlugAKI_BFF.AlugAKI_BFF.Model.Usuario;
 
@@ -38,9 +38,8 @@ public class UsuarioService {
     }
 
     public Usuario criarUsuario(Usuario usuario) {
-        usuario.setIdUsuario(null); // ← A LINHA CERTA
+        usuario.setIdUsuario(null);
         return restTemplate.postForObject(baseUrl, usuario, Usuario.class);
-        // note que baseUrl já é "/usuario"
     }
 
     public void atualizarUsuario(int id, Usuario usuario) {
@@ -49,5 +48,13 @@ public class UsuarioService {
 
     public void deletarUsuario(int id) {
         restTemplate.delete(baseUrl + "/" + id);
-    }   
+    }
+
+    public Usuario login(Object credenciais) {
+        return restTemplate.postForObject(baseUrl + "/login", credenciais, Usuario.class);
+    }
+
+    public void redefinirSenha(Object payload) {
+        restTemplate.postForLocation(baseUrl + "/redefinir-senha", payload);
+    }
 }

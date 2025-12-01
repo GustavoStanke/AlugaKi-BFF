@@ -40,4 +40,8 @@ public class ProdutoService {
     public Produto criarProduto(Produto produto) {
         return restTemplate.postForObject(baseUrl, produto, Produto.class);
     }
+
+    public void atualizarProduto(int id, Produto produto) {
+        restTemplate.put(baseUrl + "/" + id, produto);
+    }
 }

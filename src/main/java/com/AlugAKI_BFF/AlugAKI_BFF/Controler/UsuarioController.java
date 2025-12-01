@@ -56,4 +56,16 @@ public class UsuarioController {
         usuarioService.deletarUsuario(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<Usuario> login(@RequestBody Object credenciais) {
+        Usuario usuario = usuarioService.login(credenciais);
+        return ResponseEntity.ok(usuario);
+    }
+
+    @PostMapping("/redefinir-senha")
+    public ResponseEntity<Void> redefinirSenha(@RequestBody Object payload) {
+        usuarioService.redefinirSenha(payload);
+        return ResponseEntity.noContent().build();
+    }
 }
